@@ -2,7 +2,7 @@ import json
 from urllib.request import urlopen
 
 # set address
-baker_address = "tz1UUgPwikRHW1mEyVZfGYy6QaxrY6Y7WaG5"
+baker_address = ""
 fee_percent = 10.0  # delegation service fee
 cycle = 32
 #increase the page number if too many delegates
