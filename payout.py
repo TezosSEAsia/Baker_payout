@@ -1,10 +1,11 @@
+# /usr/bin/python3 payout.py 
 import json
 from urllib.request import urlopen
 
 # set address
-baker_address = ""
-fee_percent = 10.0  # delegation service fee
-cycle = 32
+baker_address = "tz1R6Ej25VSerE3MkSoEEeBjKHCDTFbpKuSX"
+fee_percent = 4.9  # delegation service fee
+cycle = 84
 #increase the page number if too many delegates
 page = 4
 
@@ -26,7 +27,7 @@ for i in range(page):
         payout = (payout * (100 - fee_percent)) / 100  # subtract fee
         payout = round(payout / 1000000, 2)  # convert to XTZ
         totalpayout = totalpayout + payout
-        print(delegator_address + " " + str(payout))
+        print("./tezos-client transfer " + str(payout) + " from " + baker_address + " to "+ delegator_address + " --fee 0.0013" )
 
 
 print("Total payout " + str(totalpayout))
