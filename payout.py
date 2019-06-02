@@ -4,8 +4,8 @@ from urllib.request import urlopen
 
 # set address
 baker_address = "tz1R6Ej25VSerE3MkSoEEeBjKHCDTFbpKuSX"
-fee_percent = 4.9  # delegation service fee
-cycle = 84
+fee_percent = 7.00  # delegation service fee
+cycle = 107
 #increase the page number if too many delegates
 page = 4
 
@@ -18,16 +18,16 @@ for i in range(page):
 
     data = json.loads(response.decode("utf-8"))
 
-    total_staking_balance = int(data['delegate_staking_balance'])
+    total_staking_balance = float(data['delegate_staking_balance'])
     total_rewards = float(data['blocks_rewards']) + float(data['endorsements_rewards']) + float (data['fees']) + float(data['gain_from_denounciation']) - float(data['lost_deposit_from_denounciation']) - float(data['lost_fees_denounciation']) - float(data['lost_rewards_denounciation'])
 
     for del_balance in data['delegators_balance']:
         delegator_address = del_balance[0]['tz']
         payout = (float(del_balance[1]) / total_staking_balance) * total_rewards
         payout = (payout * (100 - fee_percent)) / 100  # subtract fee
-        payout = round(payout / 1000000, 2)  # convert to XTZ
+        payout = round(payout / 1000000, 3)  # convert to XTZ
         totalpayout = totalpayout + payout
         print("./tezos-client transfer " + str(payout) + " from " + baker_address + " to "+ delegator_address + " --fee 0.0013" )
 
 
-print("Total payout " + str(totalpayout))
+print("Total payout for cycle " + str(cycle) + " " + str(totalpayout))
