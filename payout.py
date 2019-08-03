@@ -4,8 +4,8 @@ from urllib.request import urlopen
 
 # set address
 baker_address = "tz1R6Ej25VSerE3MkSoEEeBjKHCDTFbpKuSX"
-fee_percent = 7.00  # delegation service fee
-cycle = 107
+fee_percent = 9.50  # delegation service fee
+cycle = 136
 #increase the page number if too many delegates
 page = 4
 
